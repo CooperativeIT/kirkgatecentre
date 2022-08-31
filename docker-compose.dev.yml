@@ -1,0 +1,46 @@
+version: '3.1'
+
+services:
+# step 2
+  # drupal:
+  #   image: drupal_php_extensions
+  #   container_name: drupal
+  #   depends_on: 
+  #     - db  
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./drupal_site:/tmp
+
+# step 3
+  # drupal:
+  #   image: drupal_php_extensions
+  #   container_name: drupal
+  #   depends_on: 
+  #     - db  
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./drupal_site/drupal:/opt/drupal     
+  #   restart: always
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: tivoli
+      # the below must match those that are stated in your settings.php file
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: drupal
+    volumes:
+      - ./drupal_db/:/var/lib/mysql
+
+  maildev:
+    image: maildev/maildev
+    container_name: maildev
+    restart: always
+    ports:
+      - 1080:1080
+      - 1025:1025
