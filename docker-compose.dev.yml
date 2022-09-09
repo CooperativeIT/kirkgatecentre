@@ -10,7 +10,7 @@ services:
   #   ports:
   #     - 80:80
   #   volumes:
-  #     - ./drupal_site:/tmp
+  #     - ${FILES_PATH}drupal_site:/tmp
 
 # step 3
   # drupal:
@@ -21,7 +21,7 @@ services:
   #   ports:
   #     - 80:80
   #   volumes:
-  #     - ./drupal_site/drupal:/opt/drupal     
+  #     - ${FILES_PATH}drupal_site/drupal:/opt/drupal     
   #   restart: always
 
   db:
@@ -29,13 +29,13 @@ services:
     container_name: db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: tivoli
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
       # the below must match those that are stated in your settings.php file
-      MYSQL_DATABASE: drupal
-      MYSQL_USER: drupal
-      MYSQL_PASSWORD: drupal
+      MYSQL_DATABASE: ${DRUPAL_DB}
+      MYSQL_USER: ${DRUPAL_USER}
+      MYSQL_PASSWORD: ${DRUPAL_PW}
     volumes:
-      - ./drupal_db/:/var/lib/mysql
+      - ${FILES_PATH}drupal_db/:/var/lib/mysql
 
   maildev:
     image: maildev/maildev
