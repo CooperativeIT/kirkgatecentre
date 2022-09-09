@@ -13,5 +13,6 @@ rm -rf civicrm
 
 chmod -R 777 web/sites/default
 
-cv core:install --cms-base-url="http://civicrm.kirkgate.org.uk" --lang="en_GB"
+cv core:install --cms-base-url="$1" --lang="en_GB"
 
+rm civicrm-5.27.2-l10n.tar.gz
