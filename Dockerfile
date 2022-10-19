@@ -33,6 +33,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
 
 RUN docker-php-ext-install bcmath \
   && docker-php-ext-configure gd --with-jpeg \
+  && docker-php-ext-configure gd --with-freetype \
   && docker-php-ext-install gd \
   && docker-php-ext-install gettext \
   && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
