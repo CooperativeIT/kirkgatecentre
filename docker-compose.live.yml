@@ -39,7 +39,7 @@ services:
     #       memory: 384m
 
   db:
-    image: mariadb:10.2
+    image: mariadb:10.3
     container_name: db
     restart: always
     environment:
