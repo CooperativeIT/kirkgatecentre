@@ -11,7 +11,7 @@ cp -R civicrm/l10n/ vendor/civicrm/civicrm-core/
 cp -R civicrm/sql/ vendor/civicrm/civicrm-core/
 rm -rf civicrm
 
-chmod -R 777 web/sites/default
+chmod -R 775 web/sites/default
 
 cv core:install --cms-base-url="$1" --lang="en_GB"
 
