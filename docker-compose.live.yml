@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   traefik:
     container_name: traefik
@@ -31,15 +29,9 @@ services:
     volumes:
       - ${FILES_PATH}drupal_site/drupal:/opt/drupal
     restart: always
-    # deploy:
-    #   resources:
-    #     limits:
-    #       memory: 384m
-    #     reservations:
-    #       memory: 384m
 
   db:
-    image: mariadb:10.3
+    image: mariadb:10.3.7
     container_name: db
     restart: always
     environment:
@@ -48,12 +40,6 @@ services:
       MYSQL_DATABASE: ${DRUPAL_DB}
       MYSQL_USER: ${DRUPAL_USER}
       MYSQL_PASSWORD: ${DRUPAL_PW}
-    # deploy:
-    #   resources:
-    #     limits:
-    #       memory: 512m
-    #     reservations:
-    #       memory: 512m
     volumes:
       - ${FILES_PATH}drupal_db/:/var/lib/mysql
 
