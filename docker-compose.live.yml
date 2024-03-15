@@ -31,7 +31,7 @@ services:
     restart: always
 
   db:
-    image: mariadb
+    image: mariadb:1.1.2
     container_name: db
     restart: always
     environment:
