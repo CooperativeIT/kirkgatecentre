@@ -31,7 +31,7 @@ services:
     restart: always
 
   db:
-    image: mariadb
+    image: mariadb:10.11
     container_name: db
     restart: always
     environment:
@@ -43,10 +43,10 @@ services:
     volumes:
       - ${FILES_PATH}drupal_db/:/var/lib/mysql
 
-  maildev:
-    image: maildev/maildev
-    container_name: maildev
-    restart: always
-    ports:
-      - 1080:1080
-      - 1025:1025
+  # maildev:
+  #   image: maildev/maildev
+  #   container_name: maildev
+  #   restart: always
+  #   ports:
+  #     - 1080:1080
+  #     - 1025:1025
