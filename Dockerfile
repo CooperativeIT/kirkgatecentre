@@ -1,4 +1,4 @@
-FROM drupal:9.5.10-php8.2-apache
+FROM drupal:10.2.4-php8.2-apache
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
