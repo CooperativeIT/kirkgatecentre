@@ -28,6 +28,7 @@ services:
       - "traefik.http.routers.drupal.tls=true"
     volumes:
       - ${FILES_PATH}drupal_site/drupal:/opt/drupal
+      - ./ob.ini:/usr/local/etc/php/conf.d/ob.ini
     restart: always
 
   db:
@@ -42,7 +43,22 @@ services:
       MYSQL_PASSWORD: ${DRUPAL_PW}
     volumes:
       - ${FILES_PATH}drupal_db/:/var/lib/mysql
+      - ./transaction_isolation.cnf:/etc/mysql/conf.d/transaction_isolation.cnf
 
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    depends_on: 
+      - db
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${DRUPAL_USER}
+      PMA_PASSWORD: ${DRUPAL_PW}
+      UPLOAD_LIMIT: 300M
+    ports:
+      - 8080:80
+  
   # maildev:
   #   image: maildev/maildev
   #   container_name: maildev
