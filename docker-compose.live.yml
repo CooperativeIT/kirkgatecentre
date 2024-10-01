@@ -46,18 +46,18 @@ services:
       - ./transaction_isolation.cnf:/etc/mysql/conf.d/transaction_isolation.cnf
 
 
-  phpmyadmin:
-    image: phpmyadmin:5.2.1
-    depends_on: 
-      - db
-    restart: always
-    environment:
-      PMA_HOST: db
-      PMA_USER: ${DRUPAL_USER}
-      PMA_PASSWORD: ${DRUPAL_PW}
-      UPLOAD_LIMIT: 300M
-    ports:
-      - 8080:80
+  # phpmyadmin:
+  #   image: phpmyadmin:5.2.1
+  #   depends_on: 
+  #     - db
+  #   restart: always
+  #   environment:
+  #     PMA_HOST: db
+  #     PMA_USER: ${DRUPAL_USER}
+  #     PMA_PASSWORD: ${DRUPAL_PW}
+  #     UPLOAD_LIMIT: 300M
+  #   ports:
+  #     - 8080:80
   
   # maildev:
   #   image: maildev/maildev
