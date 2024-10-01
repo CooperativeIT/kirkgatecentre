@@ -1,10 +1,10 @@
-FROM drupal:9.5.10-php8.2-apache
+FROM drupal:10.3.5-php8.2-apache
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
   apt-transport-https
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
   bash-completion \
@@ -32,9 +32,12 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
   && rm -r /var/lib/apt/lists/*
 
 RUN docker-php-ext-install bcmath \
-  && docker-php-ext-configure gd --with-jpeg \
-  && docker-php-ext-configure gd --with-freetype \
-  && docker-php-ext-install gd \
+  && docker-php-ext-configure gd --enable-gd --with-webp --with-jpeg \
+   --with-freetype \
+  &&  docker-php-ext-install gd \
+  #&& docker-php-ext-configure gd --with-jpeg \
+  #&& docker-php-ext-configure gd --with-freetype \
+  #&& docker-php-ext-install gd \
   && docker-php-ext-install gettext \
   && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
   && docker-php-ext-install imap \
