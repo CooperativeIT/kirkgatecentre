@@ -28,7 +28,6 @@ services:
       - "traefik.http.routers.drupal.tls=true"
     volumes:
       - ${FILES_PATH}drupal_site/drupal:/opt/drupal
-      - ./ob.ini:/usr/local/etc/php/conf.d/ob.ini
     restart: always
 
   db:
@@ -43,13 +42,39 @@ services:
       MYSQL_PASSWORD: ${DRUPAL_PW}
     volumes:
       - ${FILES_PATH}drupal_db/:/var/lib/mysql
-      - ./transaction_isolation.cnf:/etc/mysql/conf.d/transaction_isolation.cnf
 
+  metabase:
+    image: metabase/metabase:v0.50.27
+    container_name: metabase
+    hostname: metabase
+    labels:
+      - "traefik.http.routers.metabase.entrypoints=websecure"
+      - "traefik.http.routers.metabase.rule=Host(${REPORTS})"
+      - "traefik.http.routers.metabase.tls=true"
+      - "traefik.http.services.metabase.loadbalancer.server.port=3000"
+    links:
+      - postgres
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: ${MB_DB_DBNAME}
+      MB_DB_PORT: 5432
+      MB_DB_USER: ${MB_DB_USER}
+      MB_DB_PASS: ${MB_DB_PASS}
+      MB_DB_HOST: ${MB_DB_HOST}
+
+  postgres:
+    image: postgres:17
+    container_name: postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: ${MB_DB_USER}
+      POSTGRES_DB: ${MB_DB_DBNAME}
+      POSTGRES_PASSWORD: ${MB_DB_PASS}
 
   # phpmyadmin:
-  #   image: phpmyadmin:5.2.1
+  #   image: phpmyadmin
   #   depends_on: 
-  #     - db
+  #     - db  
   #   restart: always
   #   environment:
   #     PMA_HOST: db
@@ -58,7 +83,7 @@ services:
   #     UPLOAD_LIMIT: 300M
   #   ports:
   #     - 8080:80
-  
+
   # maildev:
   #   image: maildev/maildev
   #   container_name: maildev

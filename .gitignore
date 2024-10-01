@@ -39,3 +39,7 @@ Thumbs.db
 #      env   file    #
 ######################
 .env
+
+# site files ##
+drupal_db/
+drupal_site/
