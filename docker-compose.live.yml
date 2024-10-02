@@ -57,7 +57,6 @@ services:
     environment:
       MB_DB_TYPE: postgres
       MB_DB_DBNAME: ${MB_DB_DBNAME}
-      MB_DB_PORT: 5432
       MB_DB_USER: ${MB_DB_USER}
       MB_DB_PASS: ${MB_DB_PASS}
       MB_DB_HOST: ${MB_DB_HOST}
@@ -70,6 +69,8 @@ services:
       POSTGRES_USER: ${MB_DB_USER}
       POSTGRES_DB: ${MB_DB_DBNAME}
       POSTGRES_PASSWORD: ${MB_DB_PASS}
+    volumes:
+      - ${FILES_PATH}pgdata:/var/lib/postgresql/data
 
   # phpmyadmin:
   #   image: phpmyadmin
