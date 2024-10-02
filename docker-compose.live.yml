@@ -28,7 +28,7 @@ services:
       - "traefik.http.routers.drupal.tls=true"
     volumes:
       - ${FILES_PATH}drupal_site/drupal:/opt/drupal
-      - ./ob.ini:/usr/local/etc/php/conf.d/ob.ini
+      - ./drupal_ini/ob.ini:/usr/local/etc/php/conf.d/ob.ini
     restart: always
 
   db:
@@ -43,7 +43,7 @@ services:
       MYSQL_PASSWORD: ${DRUPAL_PW}
     volumes:
       - ${FILES_PATH}drupal_db/:/var/lib/mysql
-      - ./transaction_isolation.cnf:/etc/mysql/conf.d/transaction_isolation.cnf
+      - ./db_cnf/transaction_isolation.cnf:/etc/mysql/conf.d/transaction_isolation.cnf
 
   metabase:
     image: metabase/metabase:v0.50.27
