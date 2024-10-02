@@ -43,3 +43,4 @@ Thumbs.db
 # site files ##
 drupal_db/
 drupal_site/
+pgdata/
