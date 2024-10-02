@@ -73,6 +73,7 @@ services:
       POSTGRES_PASSWORD: ${MB_DB_PASS}
     volumes:
       - ${FILES_PATH}pgdata:/var/lib/postgresql/data
+      # - ${FILES_PATH}/dump:/docker-entrypoint-initdb.d
 
   # phpmyadmin:
   #   image: phpmyadmin:5.2.1
