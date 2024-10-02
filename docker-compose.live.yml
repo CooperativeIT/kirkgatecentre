@@ -75,7 +75,7 @@ services:
       - ${FILES_PATH}pgdata:/var/lib/postgresql/data
 
   # phpmyadmin:
-  #   image: phpmyadmin
+  #   image: phpmyadmin:5.2.1
   #   depends_on: 
   #     - db  
   #   restart: always
